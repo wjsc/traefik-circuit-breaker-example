@@ -4,12 +4,24 @@ const port = 3000;
 const status_ok = 200;
 const status_error = 500;
 
-http.createServer( (request, response) => {
-  const status = Math.random() < 0.6 ? status_ok : status_error;
+const sleep = ms => new Promise(resolve => setTimeout( resolve , ms));
+
+let treshold = 1;
+setTimeout( () => {
+  console.log('Server crash');
+  treshold = 0.3 
+}, 20000);
+
+http.createServer( async (request, response) => {
+
+  await sleep(Math.floor(Math.random() * 1000 ));
+
+  const status = Math.random() < treshold ? status_ok : status_error;
+
   response.writeHead(status , {'Content-Type': 'application/json'});
-  console.log(status, request.path);
   response.write(JSON.stringify({ type }));
   response.end();
+  console.log(status);
 }).listen(port, 
     () => console.log(`Server '${type}' listening on port ${port}`)
 );
