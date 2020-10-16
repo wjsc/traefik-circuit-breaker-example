@@ -10,7 +10,13 @@ let treshold = 1;
 setTimeout( () => {
   console.log('Server crash');
   treshold = 0.3 
-}, 20000);
+}, 30000);
+
+setTimeout( () => {
+  console.log('Server recovered');
+  treshold = 1
+}, 60000);
+
 
 http.createServer( async (request, response) => {
 
