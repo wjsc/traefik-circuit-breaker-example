@@ -6,7 +6,7 @@ const status_error = 500;
 
 const sleep = ms => new Promise(resolve => setTimeout( resolve , ms));
 
-let treshold = 1;
+let treshold = 0.95;
 setTimeout( () => {
   console.log('Server crash');
   treshold = 0.3 
@@ -14,7 +14,7 @@ setTimeout( () => {
 
 setTimeout( () => {
   console.log('Server recovered');
-  treshold = 1
+  treshold = 0.95
 }, 60000);
 
 
